@@ -13,6 +13,8 @@ conversion between SerializableMailMessage and MailMessage objects.
 	using System;
 	using System.IO;
 	using System.Net.Mail;
+	using System.Runtime.Serialization;
+	using System.Runtime.Serialization.Formatters.Binary;
 	using S22.Mail;
 
 	namespace Test {
@@ -25,7 +27,8 @@ conversion between SerializableMailMessage and MailMessage objects.
 					// Serialize MailMessage to memory stream
 					formatter.Serialize(s, (SerializableMailMessage)message);
 
-					// Deserialize MailMessage from memory stream
+					// Rewind stream and deserialize MailMessage
+					s.Seek(0, SeekOrigin.Begin);
 					MailMessage Tmp = (SerializableMailMessage)formatter.Deserialize(s)
 
 					Console.WriteLine(Tmp.Subject);
