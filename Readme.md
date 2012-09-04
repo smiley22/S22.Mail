@@ -48,6 +48,16 @@ conversion between SerializableMailMessage and MailMessage objects.
 		}
 	}
 
+### Extension Methods
+
+*System.Net.Mail.MailMessage*
+- *Save(Stream stream)*
+- *Save(string name)*
+
+*System.Net.Mail.Attachment*
+- *SaveAs(string name)*
+
+
 ### Credits
 
 This library is copyright © 2012 Torben Könke.

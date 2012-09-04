@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
+    <Compile Include="MailMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializableMailMessage\SerializableAlternateView.cs" />
     <Compile Include="SerializableMailMessage\SerializableAlternateViewCollection.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="SerializableMailMessage\SerializableMailAddress.cs" />
     <Compile Include="SerializableMailMessage\SerializableMailAddressCollection.cs" />
     <Compile Include="SerializableMailMessage\SerializableMailMessage.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />
