@@ -36,19 +36,21 @@ namespace S22.Mail {
 		}
 
 		/// <summary>
-		/// 
+		/// Creates a MailMessage instance from the specified stream.
 		/// </summary>
-		/// <param name="stream"></param>
-		/// <returns></returns>
+		/// <param name="stream">The stream the MailMessage will be constructed
+		/// from.</param>
+		/// <returns>An initialized MailMessage object</returns>
 		public static MailMessage Load(Stream stream) {
 			return (new MessageReader(stream)).ReadMailMessage();
 		}
 
 		/// <summary>
-		/// 
+		/// Creates a MailMessage instance from the specified file (*.eml).
 		/// </summary>
-		/// <param name="name"></param>
-		/// <returns></returns>
+		/// <param name="name">A relative or absolute path for the file the
+		/// MailMessage will be saved to.</param>
+		/// <returns>An initialized MailMessage object</returns>
 		public static MailMessage Load(string name) {
 			using (FileStream s = new FileStream(name, FileMode.Open))
 				return Load(s);

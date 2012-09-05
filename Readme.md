@@ -51,6 +51,8 @@ conversion between SerializableMailMessage and MailMessage objects.
 ### Extension Methods
 
 *System.Net.Mail.MailMessage*
+- *Load(Stream stream)*
+- *Load(string name)*
 - *Save(Stream stream)*
 - *Save(string name)*
 
