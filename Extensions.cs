@@ -41,7 +41,7 @@ namespace S22.Mail {
 		/// <param name="stream"></param>
 		/// <returns></returns>
 		public static MailMessage Load(Stream stream) {
-			throw new NotImplementedException();
+			return (new MessageReader(stream)).ReadMailMessage();
 		}
 
 		/// <summary>

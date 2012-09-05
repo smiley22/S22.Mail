@@ -28,18 +28,8 @@ namespace S22.Mail {
 			NameValueCollection header = BuildHeader(message);
 			StringBuilder builder = new StringBuilder();
 
-			foreach (string h in header) {
-				string line = h + ": " + header[h];
-				// RFC2822 states a line should at max be 78 characters (excluding CRLF)
-				// so long headers may span over several lines.
-/*
-				string[] chunks = line.ToChunks(70);
-				builder.AppendLine(chunks[0]);
-				for (int i = 1; i < chunks.Length; i++)
-					builder.AppendLine(" " + chunks[i]);
- */
-				builder.AppendLine(line);
-			}
+			foreach (string h in header)
+				builder.AppendLine(h + ": " + header[h]);
 			// The mail body is separated by an empty line from the header
 			builder.AppendLine();
 			builder.Append(BuildBody(message, header));
