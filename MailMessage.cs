@@ -221,22 +221,28 @@ namespace S22.Mail {
 		/// adding the actual body part content.</param>
 		static void AddBody(StringBuilder builder, MailMessage m,
 			NameValueCollection header, bool addHeaders = false) {
+			bool base64 = header["Content-Transfer-Encoding"] == "base64";
 			if (addHeaders) {
 				string contentType = m.IsBodyHtml ? "text/html" : "text/plain";
 				if (m.BodyEncoding != null)
 					contentType = contentType + "; charset=" + m.BodyEncoding.WebName;
 				builder.AppendLine("Content-Type: " + contentType);
-				if (m.Body != null && !m.Body.IsASCII())
+				if (m.Body != null && !m.Body.IsASCII()) {
 					builder.AppendLine("Content-Transfer-Encoding: base64");
+					base64 = true;
+				}
 				builder.AppendLine();
 			}
 			string body = m.Body;
-			if (header["Content-Transfer-Encoding"] == "base64") {
+			if (base64) {
 				byte[] bytes = m.BodyEncoding.GetBytes(m.Body);
 				body = Convert.ToBase64String(bytes);
 			}
-			foreach (string chunk in body.ToChunks(76))
-				builder.AppendLine(chunk);
+			StringReader reader = new StringReader(body);
+			char[] line = new char[76];
+			int read;
+			while ((read = reader.Read(line, 0, line.Length)) > 0)
+				builder.AppendLine(new string(line, 0, read));
 		}
 
 		/// <summary>
@@ -271,8 +277,11 @@ namespace S22.Mail {
 					memstream.Write(buffer, 0, bytesRead);
 				}
 				string str = Convert.ToBase64String(memstream.ToArray());
-				foreach (string chunk in str.ToChunks(76))
-					builder.AppendLine(chunk);
+				StringReader reader = new StringReader(str);
+				char[] line = new char[76];
+				int read;
+				while ((read = reader.Read(line, 0, line.Length)) > 0)
+					builder.AppendLine(new string(line, 0, read));
 			}
 			// Rewind the stream if it supports seeking
 			if (view.ContentStream.CanSeek)
