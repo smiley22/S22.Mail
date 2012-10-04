@@ -7,7 +7,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace S22.Mail {
+namespace S22.Imap {
 	/// <summary>
 	/// Adds extension methods to the MailMessage class of the .Net Framework.
 	/// These are only used internally and are not visible outside of the

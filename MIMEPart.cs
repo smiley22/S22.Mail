@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 
-namespace S22.Mail {
+namespace S22.Imap {
 	/// <summary>
 	/// Represents a part of a MIME multi-part message. Each part consists
 	/// of its own content header and a content body.

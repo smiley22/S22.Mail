@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace S22.Mail {
+namespace S22.Imap {
 	/// <summary>
 	/// A static utility class containing methods for decoding encoded
 	/// non-ASCII data as is often used in mail messages as well as

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Mail;
 using System.Text;
+using S22.Imap;
 
 namespace S22.Mail {
 	/// <summary>
@@ -42,7 +43,9 @@ namespace S22.Mail {
 		/// from.</param>
 		/// <returns>An initialized MailMessage object</returns>
 		public static MailMessage Load(Stream stream) {
-			return (new MessageReader(stream)).ReadMailMessage();
+			using (StreamReader r = new StreamReader(stream)) {
+				return S22.Imap.MessageBuilder.FromMIME822(r.ReadToEnd());
+			}
 		}
 
 		/// <summary>
