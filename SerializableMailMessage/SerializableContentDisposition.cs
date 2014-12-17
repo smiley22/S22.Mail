@@ -9,16 +9,7 @@ namespace S22.Mail {
 			if (disposition == null)
 				return null;
 			ContentDisposition d = new ContentDisposition();
-
-			d.CreationDate = disposition.CreationDate;
-			d.DispositionType = disposition.DispositionType;
-			d.FileName = disposition.FileName;
-			d.Inline = disposition.Inline;
-			d.ModificationDate = disposition.ModificationDate;
-			foreach (string k in disposition.Parameters.Keys)
-				d.Parameters.Add(k, disposition.Parameters[k]);
-			d.ReadDate = disposition.ReadDate;
-			d.Size = disposition.Size;
+			disposition.CopyTo(d);
 			return d;
 		}
 
@@ -39,6 +30,24 @@ namespace S22.Mail {
 				Parameters.Add(k, disposition.Parameters[k]);
 			ReadDate = disposition.ReadDate;
 			Size = disposition.Size;
+		}
+
+		public void CopyTo(ContentDisposition disposition) {
+			if (disposition == null)
+				return;
+
+			disposition.Inline = Inline;
+			disposition.DispositionType = DispositionType;
+			disposition.FileName = FileName;
+			disposition.CreationDate = CreationDate;
+			disposition.ModificationDate = ModificationDate;
+			disposition.ReadDate = ReadDate;
+			if (Size != -1L) 
+				disposition.Size = Size;
+
+			foreach (string k in Parameters.Keys)
+				if (disposition.Parameters.ContainsKey(k) == false)
+					disposition.Parameters.Add(k, Parameters[k]);
 		}
 
 		public DateTime CreationDate { get; set; }
