@@ -11,23 +11,13 @@ namespace S22.Mail {
 			if (attachment == null)
 				return null;
 			Attachment a = new Attachment(attachment.ContentStream, attachment.Name);
-
-			a.ContentStream.Position = 0;
-			a.ContentDisposition.CreationDate = attachment.ContentDisposition.CreationDate;
-			a.ContentDisposition.DispositionType = attachment.ContentDisposition.DispositionType;
-			a.ContentDisposition.FileName = attachment.ContentDisposition.FileName;
-			a.ContentDisposition.Inline = attachment.ContentDisposition.Inline;
-			a.ContentDisposition.ModificationDate = attachment.ContentDisposition.ModificationDate;
-			a.ContentDisposition.ReadDate = attachment.ContentDisposition.ReadDate;
-			a.ContentDisposition.Size = attachment.ContentDisposition.Size;
-			foreach (string k in attachment.ContentDisposition.Parameters.Keys)
-				a.ContentDisposition.Parameters.Add(k, attachment.ContentDisposition.Parameters[k]);
-
+			a.ContentStream.Position = 0;            
 			a.NameEncoding = attachment.NameEncoding;
 			a.Name = attachment.Name;
 			a.ContentId = attachment.ContentId;
 			a.ContentType = attachment.ContentType;
 			a.TransferEncoding = attachment.TransferEncoding;
+			attachment.ContentDisposition.CopyTo(a.ContentDisposition);
 			return a;
 		}
 
