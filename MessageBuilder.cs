@@ -123,7 +123,7 @@ namespace S22.Imap {
 		private static NameValueCollection ParseMIMEField(string field) {
 			NameValueCollection coll = new NameValueCollection();
 			try {
-				MatchCollection matches = Regex.Matches(field, "([\\w\\-]+)=((['\"]).*?\\2|[^;\\n]*)"); // "([\\w\\-]+)=\"?([\\w\\-\\/\\.]+)"
+				MatchCollection matches = Regex.Matches(field, "([\\w\\-]+)=((['\"]).*?\\2|[^;\\n]*)");
 				foreach (Match m in matches)
 					coll.Add(m.Groups[1].Value, m.Groups[2].Value);
 				Match mvalue = Regex.Match(field, @"^\s*([\w\/]+)");
