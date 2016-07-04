@@ -148,7 +148,7 @@ namespace S22.Imap {
 			string[] addr = list.Split(',');
 			foreach (string a in addr) {
 				Match m = Regex.Match(a.Trim(),
-					@"(.*)\s*<?([A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4})>?",
+					@"(.*)\s*<?([A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,})>?",
 					RegexOptions.IgnoreCase | RegexOptions.RightToLeft);
 				if (m.Success) {
 					// The above regex will erroneously match some illegal (very rare)
