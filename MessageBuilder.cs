@@ -123,7 +123,7 @@ namespace S22.Imap {
 		private static NameValueCollection ParseMIMEField(string field) {
 			NameValueCollection coll = new NameValueCollection();
 			try {
-				MatchCollection matches = Regex.Matches(field, "([\\w\\-]+)=\"?([\\w\\-\\/\\.]+)");
+				MatchCollection matches = Regex.Matches(field, "([\\w\\-]+)=((['\"]).*?\\2|[^;\\n]*)");
 				foreach (Match m in matches)
 					coll.Add(m.Groups[1].Value, m.Groups[2].Value);
 				Match mvalue = Regex.Match(field, @"^\s*([\w\/]+)");
@@ -148,7 +148,7 @@ namespace S22.Imap {
 			string[] addr = list.Split(',');
 			foreach (string a in addr) {
 				Match m = Regex.Match(a.Trim(),
-					@"(.*)\s*<?([A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4})>?",
+					@"(.*)\s*<?([A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,})>?",
 					RegexOptions.IgnoreCase | RegexOptions.RightToLeft);
 				if (m.Success) {
 					// The above regex will erroneously match some illegal (very rare)
