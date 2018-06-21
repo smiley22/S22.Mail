@@ -32,7 +32,7 @@ namespace S22.Mail {
 			Name = contentType.Name;
 			Parameters = new StringDictionary();
 			foreach (string k in contentType.Parameters.Keys) {
-				if(contentType.Parameters.ContainsKey(k) == false)
+				if(Parameters.ContainsKey(k) == false)
 					Parameters.Add(k, contentType.Parameters[k]);
 			}
 		}
