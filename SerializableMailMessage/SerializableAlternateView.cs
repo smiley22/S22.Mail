@@ -35,6 +35,7 @@ namespace S22.Mail {
 			ContentStream = new MemoryStream();
 			view.ContentStream.CopyTo(ContentStream);
 			view.ContentStream.Position = 0;
+			ContentStream.Position = 0;
 			ContentType = view.ContentType;
 			TransferEncoding = view.TransferEncoding;
 		}
