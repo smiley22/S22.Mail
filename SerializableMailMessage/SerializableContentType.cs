@@ -15,7 +15,8 @@ namespace S22.Mail {
 			ct.MediaType = contentType.MediaType;
 			ct.Name = contentType.Name;
 			foreach (string k in contentType.Parameters.Keys)
-				ct.Parameters.Add(k, contentType.Parameters[k]);
+				if(ct.Parameters.ContainsKey(k) == false)
+					ct.Parameters.Add(k, contentType.Parameters[k]);
 			return ct;
 		}
 
@@ -32,7 +33,7 @@ namespace S22.Mail {
 			Name = contentType.Name;
 			Parameters = new StringDictionary();
 			foreach (string k in contentType.Parameters.Keys) {
-				if(contentType.Parameters.ContainsKey(k) == false)
+				if(Parameters.ContainsKey(k) == false)
 					Parameters.Add(k, contentType.Parameters[k]);
 			}
 		}
